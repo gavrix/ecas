@@ -18,9 +18,14 @@ NSString *kECASBackendXPATHApplications = @"//form[@action='viewcasestatus.do']/
 NSString *kECASBackendXPATHApplicationName = @"//section/h3";
 NSString *kECASBackendXPATHApplicationLink = @"//tbody/tr/td[2]/a";
 
+NSString *kECASBackendXPATHHistoryApplicationName = @"//form[@action='viewcasehistory.do']/section/h2";
+NSString *kECASBackendXPATHHistoryRecord = @"//form[@action='viewcasehistory.do']/section/ol/li";
+
 NSString *kECASBackendXPATHApplicationsKey = @"kECASBackendXPATHApplicationsKey";
 NSString *kECASBackendXPATHApplicationNameKey = @"kECASBackendXPATHApplicationNameKey";
 NSString *kECASBackendXPATHApplicationLinkKey = @"kECASBackendXPATHApplicationLinkKey";
+NSString *kECASBackendXPATHHistoryApplicationNameKey = @"kECASBackendXPATHHistoryApplicationNameKey";
+NSString *kECASBackendXPATHHistoryRecordKey = @"kECASBackendXPATHHistoryRecordKey";
 
 @interface ECASBackendService ()
 @property (nonatomic) AFHTTPRequestOperationManager *operationManager;
@@ -38,7 +43,9 @@ NSString *kECASBackendXPATHApplicationLinkKey = @"kECASBackendXPATHApplicationLi
 
 		self.parserDescriptor = @{ kECASBackendXPATHApplicationsKey : kECASBackendXPATHApplications,
 			                       kECASBackendXPATHApplicationNameKey : kECASBackendXPATHApplicationName,
-			                       kECASBackendXPATHApplicationLinkKey : kECASBackendXPATHApplicationLink };
+			                       kECASBackendXPATHApplicationLinkKey : kECASBackendXPATHApplicationLink,
+			                       kECASBackendXPATHHistoryApplicationNameKey : kECASBackendXPATHHistoryApplicationName,
+			                       kECASBackendXPATHHistoryRecordKey : kECASBackendXPATHHistoryRecord };
 	}
 	return self;
 }
@@ -116,29 +123,30 @@ NSString *kECASBackendXPATHApplicationLinkKey = @"kECASBackendXPATHApplicationLi
 - (AFHTTPRequestOperation *)queryApplicationStatus:(ECASApplication *)application withCompletionBlock:(void (^)(NSArray *statusRecords, NSError *error))completionBlock {
 	NSString *query = application.statusUrl.query;
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
-	[[query componentsSeparatedByString:@"&"] enumerateObjectsUsingBlock:^(NSString *pairStr, NSUInteger idx, BOOL *stop) {
-		NSArray *pair = [pairStr componentsSeparatedByString:@"="];
-		params[pair[0]] = pair[1];
+	[[query componentsSeparatedByString:@"&"] enumerateObjectsUsingBlock: ^(NSString *pairStr, NSUInteger idx, BOOL *stop) {
+	    NSArray *pair = [pairStr componentsSeparatedByString:@"="];
+	    params[pair[0]] = pair[1];
 	}];
 	return [self.operationManager GET:application.statusUrl.relativePath
-						   parameters:params
-							  success:^(AFHTTPRequestOperation *operation, NSData *responseObject) {
-								  if (completionBlock) {
-									  TFHpple *parser = [TFHpple hppleWithHTMLData:responseObject];
-									  NSString *appType = [parser peekAtSearchWithXPathQuery:@"//form[@action='viewcasehistory.do']/section/h2"].text;
-									  NSArray *history = [parser searchWithXPathQuery:@"//form[@action='viewcasehistory.do']/section/ol/li"];
-									  NSMutableArray *mutableHistoryArr = [NSMutableArray array];
-									  for (TFHppleElement *elem in history) {
-										  [mutableHistoryArr addObject:elem.text];
-									  }
-									  completionBlock(mutableHistoryArr.copy, nil);
-								  }
-							  }
-							  failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-								  if (completionBlock) {
-									  completionBlock(nil, error);
-								  }
-							  }];
+	                       parameters:params
+	                          success: ^(AFHTTPRequestOperation *operation, NSData *responseObject) {
+	    if (completionBlock) {
+	        TFHpple *parser = [TFHpple hppleWithHTMLData:responseObject];
+//	        NSString *appType = [parser peekAtSearchWithXPathQuery:self.parserDescriptor[kECASBackendXPATHHistoryApplicationNameKey]].text;
+	        NSArray *history = [parser searchWithXPathQuery:self.parserDescriptor[kECASBackendXPATHHistoryRecordKey]];
+	        NSMutableArray *mutableHistoryArr = [NSMutableArray array];
+	        for (TFHppleElement * elem in history) {
+	            [mutableHistoryArr addObject:elem.text];
+			}
+	        completionBlock(mutableHistoryArr.copy, nil);
+		}
+	}
+
+	                          failure: ^(AFHTTPRequestOperation *operation, NSError *error) {
+	    if (completionBlock) {
+	        completionBlock(nil, error);
+		}
+	}];
 }
 
 @end
