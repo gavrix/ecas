@@ -7,17 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SRGLoadableViewModel.h"
+
 
 @class ECASIdentity;
 @class RACSignal;
 
-@interface ECASMainViewModel : NSObject
+@interface ECASMainViewModel : SRGLoadableViewModel
 
 @property (nonatomic) ECASIdentity *identity;
-
 @property (nonatomic, readonly) NSArray *applications;
-@property (nonatomic, readonly) BOOL loading;
-@property (nonatomic, readonly) NSError *lastError;
 
-- (void)reloadApplications:(id)sender;
 @end

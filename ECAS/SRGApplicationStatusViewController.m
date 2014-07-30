@@ -22,14 +22,35 @@
 	[super awakeFromNib];
 	self.viewModel = [SRGApplicationStatusViewModel new];
 	[self rac_liftSelector:@selector(statusesUpdated:) withSignals:RACObserve(self, viewModel.statuses), nil];
+	[self rac_liftSelector:@selector(setRefreshing:) withSignals:RACObserve(self, viewModel.loading), nil];
+	[self.viewModel rac_liftSelector:@selector(reload:)
+						 withSignals:[[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged]
+									  mapReplace:self.refreshControl], nil];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+	self.refreshControl = [[UIRefreshControl alloc] init];
 }
+
+#pragma mark - Reactive-backed methods
 
 - (void)statusesUpdated:(NSArray *)statuses {
 	[self.tableView reloadData];
+}
+
+- (void)setRefreshing:(BOOL)refreshing {
+	if (refreshing) {
+		[self.refreshControl beginRefreshing];
+		[UIView animateWithDuration:0.25
+		                 animations: ^(void) {
+		    [UIView setAnimationBeginsFromCurrentState:YES];
+		    self.tableView.contentOffset = CGPointMake(0, -(self.refreshControl.frame.size.height + self.topLayoutGuide.length));
+		}];
+	}
+	else {
+		[self.refreshControl endRefreshing];
+	}
 }
 
 #pragma mark - UITableViewDelegate

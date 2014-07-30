@@ -17,7 +17,8 @@
 - (instancetype)init {
 	self = [super init];
 	if (self) {
-		RAC(self, statuses) = [RACObserve(self, application) map:^id(ECASApplication *application) {
+		
+		self.loadingSignal = [RACObserve(self, application) map:^id(ECASApplication *application) {
 			return application ? [RACSignal createSignal: ^RACDisposable *(id < RACSubscriber > subscriber) {
 				NSOperation *operation = [[ECASBackendService sharedService] queryApplicationStatus:application
 				                                                                withCompletionBlock: ^(NSArray *statusRecords, NSError *error) {
@@ -29,11 +30,13 @@
 				        [subscriber sendCompleted];
 					}
 				}];
-			    return [RACDisposable disposableWithBlock: ^{
-			        [operation cancel];
+				return [RACDisposable disposableWithBlock: ^{
+				    [operation cancel];
 				}];
 			}] : [RACSignal return:nil];
-		}].switchToLatest.replayLazily;
+		}];
+		
+		RAC(self, statuses) = RACObserve(self, loadedResult);
 	}
 	return self;
 }

@@ -10,6 +10,7 @@
 		52C075CF353B456A8A7FF7DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D42B46B5D0740FBAE74B3FE /* libPods.a */; };
 		7478FE4E197F6C23006DDFD1 /* SRGApplicationStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478FE4D197F6C23006DDFD1 /* SRGApplicationStatusViewController.m */; };
 		7478FE51197F6C33006DDFD1 /* SRGApplicationStatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478FE50197F6C33006DDFD1 /* SRGApplicationStatusViewModel.m */; };
+		7483CE411989A593005FF10A /* SRGLoadableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7483CE401989A593005FF10A /* SRGLoadableViewModel.m */; };
 		74AA8FEE19106468009EC8E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74AA8FED19106468009EC8E1 /* Foundation.framework */; };
 		74AA8FF019106468009EC8E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74AA8FEF19106468009EC8E1 /* CoreGraphics.framework */; };
 		74AA8FF219106468009EC8E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74AA8FF119106468009EC8E1 /* UIKit.framework */; };
@@ -55,6 +56,8 @@
 		7478FE4D197F6C23006DDFD1 /* SRGApplicationStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGApplicationStatusViewController.m; sourceTree = "<group>"; };
 		7478FE4F197F6C33006DDFD1 /* SRGApplicationStatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGApplicationStatusViewModel.h; sourceTree = "<group>"; };
 		7478FE50197F6C33006DDFD1 /* SRGApplicationStatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGApplicationStatusViewModel.m; sourceTree = "<group>"; };
+		7483CE3F1989A593005FF10A /* SRGLoadableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGLoadableViewModel.h; sourceTree = "<group>"; };
+		7483CE401989A593005FF10A /* SRGLoadableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGLoadableViewModel.m; sourceTree = "<group>"; };
 		74AA8FEA19106468009EC8E1 /* ECAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74AA8FED19106468009EC8E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		74AA8FEF19106468009EC8E1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -135,6 +138,15 @@
 				7478FE50197F6C33006DDFD1 /* SRGApplicationStatusViewModel.m */,
 			);
 			name = ApplicationStatus;
+			sourceTree = "<group>";
+		};
+		7483CE3E1989A57A005FF10A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				7483CE3F1989A593005FF10A /* SRGLoadableViewModel.h */,
+				7483CE401989A593005FF10A /* SRGLoadableViewModel.m */,
+			);
+			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		74AA8FE119106468009EC8E1 = {
@@ -261,6 +273,7 @@
 		74E6201D1913E6D000B0BB72 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7483CE3E1989A57A005FF10A /* ViewModels */,
 				74F622F61917E2E700B52537 /* ListPicker */,
 				74E6201E1913E70A00B0BB72 /* DatePicker */,
 				74F622F3191752A900B52537 /* SRGViewPopup.h */,
@@ -457,6 +470,7 @@
 				74F62319191A852600B52537 /* ECASMainViewModel.m in Sources */,
 				74AA8FFE19106468009EC8E1 /* SRGAppDelegate.m in Sources */,
 				74AA902419106EB4009EC8E1 /* ECASSettingsViewController.m in Sources */,
+				7483CE411989A593005FF10A /* SRGLoadableViewModel.m in Sources */,
 				74EF758B19626BE800D0EBB3 /* SRGApplicationCell.m in Sources */,
 				74AA902E19108282009EC8E1 /* ECASIdentity.m in Sources */,
 				74F622F91917E31800B52537 /* SRGListPickerPopup.m in Sources */,

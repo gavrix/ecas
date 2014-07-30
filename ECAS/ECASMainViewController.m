@@ -33,7 +33,9 @@
 
 	self.viewModel = [[ECASMainViewModel alloc] init];
 
-	RAC(self, viewModel.identity) = [[RACSignal return:ECASIdentity.globalIdentity] concat:[[[NSNotificationCenter defaultCenter] rac_addObserverForName:kECASIdentityUpdatedNotification object:nil] map: ^id (NSNotification *value) {
+	RAC(self, viewModel.identity) = [[RACSignal return:ECASIdentity.globalIdentity]
+									 concat:[[[NSNotificationCenter defaultCenter] rac_addObserverForName:kECASIdentityUpdatedNotification object:nil]
+											 map: ^id (NSNotification *value) {
 	    return value.userInfo[kECASIdentityNotificationKey];
 	}]];
 	
@@ -46,7 +48,7 @@
 	self.refreshControl = [[UIRefreshControl alloc] init];
 	self.navigationItem.title = NSLocalizedString(@"Applications", "UIViewController's navigation title");
 	
-	[self.viewModel rac_liftSelector:@selector(reloadApplications:)
+	[self.viewModel rac_liftSelector:@selector(reload:)
 						 withSignals:[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged], nil];
 }
 

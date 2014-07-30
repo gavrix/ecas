@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SRGLoadableViewModel.h"
+
 @class ECASApplication;
 
-@interface SRGApplicationStatusViewModel : NSObject
-@property (nonatomic) ECASApplication *application;
+@interface SRGApplicationStatusViewModel : SRGLoadableViewModel
 
+@property (nonatomic) ECASApplication *application;
 @property (nonatomic) NSArray *statuses;
 
 @end
