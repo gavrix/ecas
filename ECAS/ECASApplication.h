@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface ECASApplication : NSObject
-+ (instancetype)applicationWithName:(NSString *)name statusUrl:(NSURL *)statusUrl;
++ (instancetype)applicationWithName:(NSString *)name
+							 status:(NSString *)status
+						 detailsUrl:(NSURL *)detailsUrl;
 
 @property (nonatomic, readonly) NSString *name;
-@property (nonatomic, readonly) NSURL *statusUrl;
-
+@property (nonatomic, readonly) NSURL *detailsUrl;
+@property (nonatomic, readonly) NSString *status;
 @end

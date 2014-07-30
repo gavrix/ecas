@@ -8,27 +8,26 @@
 
 #import "SRGApplicationCell.h"
 
+#import "SRGApplicationCellViewModel.h"
+
+#import <ReactiveCocoa/ReactiveCocoa.h>
+
+@interface SRGApplicationCell ()
+@property (weak, nonatomic) IBOutlet UILabel *applicationNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *applicationStatusLabel;
+
+@property (nonatomic) SRGApplicationCellViewModel *viewModel;
+@end
+
 @implementation SRGApplicationCell
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
-{
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        // Initialization code
-    }
-    return self;
+
+- (void)awakeFromNib {
+	self.viewModel = [SRGApplicationCellViewModel new];
+	
+	RAC(self, applicationNameLabel.text) = RACObserve(self, viewModel.appName);
+	RAC(self, applicationStatusLabel.text) = RACObserve(self, viewModel.appStatus);
 }
 
-- (void)awakeFromNib
-{
-    // Initialization code
-}
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
-{
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
-}
 
 @end

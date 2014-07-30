@@ -60,6 +60,12 @@ NSString *kECASBackendXPATHHistoryRecordKey = @"kECASBackendXPATHHistoryRecordKe
 }
 
 - (AFHTTPRequestOperation *)authenticateIdentity:(ECASIdentity *)identity withCompletionBlock:(void (^)(NSError *error))completionBlock {
+	
+	NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL: self.operationManager.baseURL];
+	for (NSHTTPCookie *cookie in cookies) {
+		[[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+	}
+	
 	AFHTTPRequestOperation *operation = [self.operationManager POST:@"authenticate.do"
 	                                                     parameters:[[MTLJSONAdapter JSONDictionaryFromModel:identity] mtl_dictionaryByAddingEntriesFromDictionary:
 	                                                                                                           @{ @"_page":@"_target0", @"app":@"ecas", @"_submit":@"Continue", @"lang":@"" }]
@@ -102,11 +108,14 @@ NSString *kECASBackendXPATHHistoryRecordKey = @"kECASBackendXPATHHistoryRecordKe
 	                                      self.parserDescriptor[kECASBackendXPATHApplicationsKey]];
 	        for (TFHppleElement * element in applicationsNodes) {
 	            TFHpple *appParser = [TFHpple hppleWithHTMLData:[element.raw dataUsingEncoding:NSUTF8StringEncoding]];
-	            NSString *appName = [[appParser peekAtSearchWithXPathQuery:self.parserDescriptor[kECASBackendXPATHApplicationNameKey]] text];
-	            NSString *appLink = [[appParser peekAtSearchWithXPathQuery:self.parserDescriptor[kECASBackendXPATHApplicationLinkKey]] objectForKey:@"href"];
+	            NSString *appName = [appParser peekAtSearchWithXPathQuery:self.parserDescriptor[kECASBackendXPATHApplicationNameKey]].text;
+				TFHppleElement *appNodeLinkNode = [appParser peekAtSearchWithXPathQuery:self.parserDescriptor[kECASBackendXPATHApplicationLinkKey]];
+	            NSString *appLink = [appNodeLinkNode objectForKey:@"href"];
+				NSString *appStatus = [[appNodeLinkNode text] stringByTrimmingCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"\n\t"]];
 	            if (appName.length && appLink.length) {
 	                [applicationsArr addObject:[ECASApplication applicationWithName:appName
-	                                                                      statusUrl:[NSURL URLWithString:appLink relativeToURL:self.operationManager.baseURL]]];
+																			 status:appStatus
+																		 detailsUrl:[NSURL URLWithString:appLink relativeToURL:self.operationManager.baseURL]]];
 				}
 			}
 	        completionBlock(applicationsArr.copy, nil);
@@ -121,13 +130,13 @@ NSString *kECASBackendXPATHHistoryRecordKey = @"kECASBackendXPATHHistoryRecordKe
 }
 
 - (AFHTTPRequestOperation *)queryApplicationStatus:(ECASApplication *)application withCompletionBlock:(void (^)(NSArray *statusRecords, NSError *error))completionBlock {
-	NSString *query = application.statusUrl.query;
+	NSString *query = application.detailsUrl.query;
 	NSMutableDictionary *params = [NSMutableDictionary dictionary];
 	[[query componentsSeparatedByString:@"&"] enumerateObjectsUsingBlock: ^(NSString *pairStr, NSUInteger idx, BOOL *stop) {
 	    NSArray *pair = [pairStr componentsSeparatedByString:@"="];
 	    params[pair[0]] = pair[1];
 	}];
-	return [self.operationManager GET:application.statusUrl.relativePath
+	return [self.operationManager GET:application.detailsUrl.relativePath
 	                       parameters:params
 	                          success: ^(AFHTTPRequestOperation *operation, NSData *responseObject) {
 	    if (completionBlock) {

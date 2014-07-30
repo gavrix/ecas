@@ -14,6 +14,10 @@
 @interface ECASMainViewModel : NSObject
 
 @property (nonatomic) ECASIdentity *identity;
-@property (nonatomic) NSArray *applications;
 
+@property (nonatomic, readonly) NSArray *applications;
+@property (nonatomic, readonly) BOOL loading;
+@property (nonatomic, readonly) NSError *lastError;
+
+- (void)reloadApplications:(id)sender;
 @end

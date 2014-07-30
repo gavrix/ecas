@@ -10,6 +10,13 @@
 #import "ECASSettingsViewController.h"
 #import "ECASMainViewModel.h"
 #import "ECASApplication.h"
+#import "ECASIdentity.h"
+
+#import "SRGApplicationCell.h"
+#import "SRGApplicationCellViewModel.h"
+
+#import "SRGApplicationStatusViewController.h"
+#import "SRGApplicationStatusViewModel.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -26,38 +33,81 @@
 
 	self.viewModel = [[ECASMainViewModel alloc] init];
 
-	RAC(self, viewModel.identity) = [[[NSNotificationCenter defaultCenter] rac_addObserverForName:kECASIdentityUpdatedNotification object:nil] map: ^id (NSNotification *value) {
+	RAC(self, viewModel.identity) = [[RACSignal return:ECASIdentity.globalIdentity] concat:[[[NSNotificationCenter defaultCenter] rac_addObserverForName:kECASIdentityUpdatedNotification object:nil] map: ^id (NSNotification *value) {
 	    return value.userInfo[kECASIdentityNotificationKey];
-	}];
+	}]];
 	
-	
+	[self rac_liftSelector:@selector(applicationsUpdated:) withSignals:RACObserve(self, viewModel.applications), nil];
+	[self rac_liftSelector:@selector(setRefreshing:) withSignals:RACObserve(self, viewModel.loading), nil];
 }
 
 - (void)viewDidLoad {
 	[super viewDidLoad];
+	self.refreshControl = [[UIRefreshControl alloc] init];
+	self.navigationItem.title = NSLocalizedString(@"Applications", "UIViewController's navigation title");
+	
+	[self.viewModel rac_liftSelector:@selector(reloadApplications:)
+						 withSignals:[self.refreshControl rac_signalForControlEvents:UIControlEventValueChanged], nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
 	[super viewDidAppear:animated];
 }
 
+- (void)applicationsUpdated:(NSArray *)applications {
+	[self.tableView reloadData];
+}
+
+#pragma mark - Reactive-backed methods
+
+- (void)setRefreshing:(BOOL)refreshing {
+	if (refreshing) {
+		[self.refreshControl beginRefreshing];
+		[UIView animateWithDuration:0.25
+						 animations: ^(void) {
+			[UIView setAnimationBeginsFromCurrentState:YES];
+			self.tableView.contentOffset = CGPointMake(0, -(self.refreshControl.frame.size.height + self.topLayoutGuide.length));
+		}];
+	}
+	else {
+		[self.refreshControl endRefreshing];
+	}
+}
 
 #pragma mark - UITableviewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return self.viewModel.applications.count;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	return 1;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return self.viewModel.applications.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	return 95.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ApplicationCell" forIndexPath:indexPath];
-	ECASApplication *application = self.viewModel.applications[0];
-	cell.textLabel.text = application.name;
+	SRGApplicationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ApplicationCell" forIndexPath:indexPath];
+	ECASApplication *application = self.viewModel.applications[indexPath.row];
+	cell.viewModel.application = application;
 	return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+	
+	[self performSegueWithIdentifier:@"applicationStatus" sender:self.viewModel.applications[indexPath.row]];
+}
+
+
+#pragma mark - Segue
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+	if ([segue.identifier isEqualToString:@"applicationStatus"]) {
+		[(SRGApplicationStatusViewController *)segue.destinationViewController viewModel].application = sender;
+	}
+}
 
 @end

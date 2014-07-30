@@ -10,15 +10,17 @@
 
 @interface ECASApplication ()
 @property (nonatomic) NSString *name;
-@property (nonatomic) NSURL *statusUrl;
+@property (nonatomic) NSURL *detailsUrl;
+@property (nonatomic) NSString *status;
 @end
 
 @implementation ECASApplication
 
-+ (instancetype)applicationWithName:(NSString *)name statusUrl:(NSURL *)statusUrl {
++ (instancetype)applicationWithName:(NSString *)name status:(NSString *)status detailsUrl:(NSURL *)detailsUrl {
 	ECASApplication *_self = [self new];
 	_self.name = name;
-	_self.statusUrl = statusUrl;
+	_self.detailsUrl = detailsUrl;
+	_self.status = status;
 	return _self;
 }
 @end

@@ -111,7 +111,7 @@ NSString *kECASIdentityNotificationKey = @"kECASIdentityNotificationKey";
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 	UITableViewCell *selectedCell = [tableView cellForRowAtIndexPath:indexPath];
 	if (selectedCell == self.birthdayCell) {
-		[SRGDatePickerPopup presentDatePickerWithInitialDate:self.identityViewModel.birthdayDate
+		[SRGDatePickerPopup presentDatePickerWithInitialDate:self.identityViewModel.birthdayDate?:[NSDate date]
 											  withCompletion:^(NSDate *date) {
 			self.identityViewModel.birthdayDate = date;
 		} withCancelled:nil];
