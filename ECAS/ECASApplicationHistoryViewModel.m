@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Sergey Gavrilyuk. All rights reserved.
 //
 
-#import "ECASApplicationStatusViewModel.h"
+#import "ECASApplicationHistoryViewModel.h"
 #import "ECASBackendService.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <AFNetworking/AFHTTPRequestOperation.h>
 
-@implementation ECASApplicationStatusViewModel
+@implementation ECASApplicationHistoryViewModel
 
 - (instancetype)init {
 	self = [super init];

@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		52C075CF353B456A8A7FF7DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D42B46B5D0740FBAE74B3FE /* libPods.a */; };
-		7478FE4E197F6C23006DDFD1 /* ECASApplicationStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478FE4D197F6C23006DDFD1 /* ECASApplicationStatusViewController.m */; };
-		7478FE51197F6C33006DDFD1 /* ECASApplicationStatusViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478FE50197F6C33006DDFD1 /* ECASApplicationStatusViewModel.m */; };
+		7478FE4E197F6C23006DDFD1 /* ECASApplicationHistoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478FE4D197F6C23006DDFD1 /* ECASApplicationHistoryViewController.m */; };
+		7478FE51197F6C33006DDFD1 /* ECASApplicationHistoryViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7478FE50197F6C33006DDFD1 /* ECASApplicationHistoryViewModel.m */; };
 		7483CE411989A593005FF10A /* SRGLoadableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7483CE401989A593005FF10A /* SRGLoadableViewModel.m */; };
+		7483CE461989FA5B005FF10A /* ECASAppHistoryRecordCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7483CE451989FA5B005FF10A /* ECASAppHistoryRecordCell.m */; };
+		7483CE491989FA70005FF10A /* ECASAppHistoryRecordViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7483CE481989FA70005FF10A /* ECASAppHistoryRecordViewModel.m */; };
 		74AA8FEE19106468009EC8E1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74AA8FED19106468009EC8E1 /* Foundation.framework */; };
 		74AA8FF019106468009EC8E1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74AA8FEF19106468009EC8E1 /* CoreGraphics.framework */; };
 		74AA8FF219106468009EC8E1 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74AA8FF119106468009EC8E1 /* UIKit.framework */; };
@@ -52,12 +54,16 @@
 
 /* Begin PBXFileReference section */
 		1D42B46B5D0740FBAE74B3FE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7478FE4C197F6C23006DDFD1 /* ECASApplicationStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECASApplicationStatusViewController.h; sourceTree = "<group>"; };
-		7478FE4D197F6C23006DDFD1 /* ECASApplicationStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECASApplicationStatusViewController.m; sourceTree = "<group>"; };
-		7478FE4F197F6C33006DDFD1 /* ECASApplicationStatusViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECASApplicationStatusViewModel.h; sourceTree = "<group>"; };
-		7478FE50197F6C33006DDFD1 /* ECASApplicationStatusViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECASApplicationStatusViewModel.m; sourceTree = "<group>"; };
+		7478FE4C197F6C23006DDFD1 /* ECASApplicationHistoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECASApplicationHistoryViewController.h; sourceTree = "<group>"; };
+		7478FE4D197F6C23006DDFD1 /* ECASApplicationHistoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECASApplicationHistoryViewController.m; sourceTree = "<group>"; };
+		7478FE4F197F6C33006DDFD1 /* ECASApplicationHistoryViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECASApplicationHistoryViewModel.h; sourceTree = "<group>"; };
+		7478FE50197F6C33006DDFD1 /* ECASApplicationHistoryViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECASApplicationHistoryViewModel.m; sourceTree = "<group>"; };
 		7483CE3F1989A593005FF10A /* SRGLoadableViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRGLoadableViewModel.h; sourceTree = "<group>"; };
 		7483CE401989A593005FF10A /* SRGLoadableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRGLoadableViewModel.m; sourceTree = "<group>"; };
+		7483CE441989FA5B005FF10A /* ECASAppHistoryRecordCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECASAppHistoryRecordCell.h; sourceTree = "<group>"; };
+		7483CE451989FA5B005FF10A /* ECASAppHistoryRecordCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECASAppHistoryRecordCell.m; sourceTree = "<group>"; };
+		7483CE471989FA70005FF10A /* ECASAppHistoryRecordViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECASAppHistoryRecordViewModel.h; sourceTree = "<group>"; };
+		7483CE481989FA70005FF10A /* ECASAppHistoryRecordViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECASAppHistoryRecordViewModel.m; sourceTree = "<group>"; };
 		74AA8FEA19106468009EC8E1 /* ECAS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ECAS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74AA8FED19106468009EC8E1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		74AA8FEF19106468009EC8E1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,15 +135,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7478FE4B197F6BE4006DDFD1 /* ApplicationStatus */ = {
+		7478FE4B197F6BE4006DDFD1 /* ApplicationHistory */ = {
 			isa = PBXGroup;
 			children = (
-				7478FE4C197F6C23006DDFD1 /* ECASApplicationStatusViewController.h */,
-				7478FE4D197F6C23006DDFD1 /* ECASApplicationStatusViewController.m */,
-				7478FE4F197F6C33006DDFD1 /* ECASApplicationStatusViewModel.h */,
-				7478FE50197F6C33006DDFD1 /* ECASApplicationStatusViewModel.m */,
+				7483CE431989FA3D005FF10A /* Cell */,
+				7478FE4C197F6C23006DDFD1 /* ECASApplicationHistoryViewController.h */,
+				7478FE4D197F6C23006DDFD1 /* ECASApplicationHistoryViewController.m */,
+				7478FE4F197F6C33006DDFD1 /* ECASApplicationHistoryViewModel.h */,
+				7478FE50197F6C33006DDFD1 /* ECASApplicationHistoryViewModel.m */,
 			);
-			name = ApplicationStatus;
+			name = ApplicationHistory;
 			sourceTree = "<group>";
 		};
 		7483CE3E1989A57A005FF10A /* ViewModels */ = {
@@ -147,6 +154,17 @@
 				7483CE401989A593005FF10A /* SRGLoadableViewModel.m */,
 			);
 			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		7483CE431989FA3D005FF10A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7483CE441989FA5B005FF10A /* ECASAppHistoryRecordCell.h */,
+				7483CE451989FA5B005FF10A /* ECASAppHistoryRecordCell.m */,
+				7483CE471989FA70005FF10A /* ECASAppHistoryRecordViewModel.h */,
+				7483CE481989FA70005FF10A /* ECASAppHistoryRecordViewModel.m */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		74AA8FE119106468009EC8E1 = {
@@ -240,7 +258,7 @@
 		74AA902919108246009EC8E1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				7478FE4B197F6BE4006DDFD1 /* ApplicationStatus */,
+				7478FE4B197F6BE4006DDFD1 /* ApplicationHistory */,
 				74AA902B1910825E009EC8E1 /* Main */,
 				74AA9025191081CB009EC8E1 /* Settings */,
 			);
@@ -457,7 +475,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7478FE4E197F6C23006DDFD1 /* ECASApplicationStatusViewController.m in Sources */,
+				7478FE4E197F6C23006DDFD1 /* ECASApplicationHistoryViewController.m in Sources */,
+				7483CE491989FA70005FF10A /* ECASAppHistoryRecordViewModel.m in Sources */,
 				74AA900419106469009EC8E1 /* ECASMainViewController.m in Sources */,
 				74AA9028191081E5009EC8E1 /* ECASIdentityViewModel.m in Sources */,
 				74AA8FFA19106468009EC8E1 /* main.m in Sources */,
@@ -465,7 +484,7 @@
 				74E620211913E72100B0BB72 /* SRGDatePickerPopup.m in Sources */,
 				74F6231219197FDC00B52537 /* ECASBackendService.m in Sources */,
 				74F622F5191752A900B52537 /* SRGViewPopup.m in Sources */,
-				7478FE51197F6C33006DDFD1 /* ECASApplicationStatusViewModel.m in Sources */,
+				7478FE51197F6C33006DDFD1 /* ECASApplicationHistoryViewModel.m in Sources */,
 				74F623151919831200B52537 /* ECASApplication.m in Sources */,
 				74F62319191A852600B52537 /* ECASMainViewModel.m in Sources */,
 				74AA8FFE19106468009EC8E1 /* SRGAppDelegate.m in Sources */,
@@ -474,6 +493,7 @@
 				74EF758B19626BE800D0EBB3 /* ECASApplicationCell.m in Sources */,
 				74AA902E19108282009EC8E1 /* ECASIdentity.m in Sources */,
 				74F622F91917E31800B52537 /* SRGListPickerPopup.m in Sources */,
+				7483CE461989FA5B005FF10A /* ECASAppHistoryRecordCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

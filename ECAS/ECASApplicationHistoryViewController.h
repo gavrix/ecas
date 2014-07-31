@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class ECASApplicationStatusViewModel;
+@class ECASApplicationHistoryViewModel;
 
-@interface ECASApplicationStatusViewController : UITableViewController
-@property (nonatomic) ECASApplicationStatusViewModel *viewModel;
+@interface ECASApplicationHistoryViewController : UITableViewController
+@property (nonatomic) ECASApplicationHistoryViewModel *viewModel;
 @end

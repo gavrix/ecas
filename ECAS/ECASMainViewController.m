@@ -15,8 +15,8 @@
 #import "ECASApplicationCell.h"
 #import "ECASApplicationCellViewModel.h"
 
-#import "ECASApplicationStatusViewController.h"
-#import "ECASApplicationStatusViewModel.h"
+#import "ECASApplicationHistoryViewController.h"
+#import "ECASApplicationHistoryViewModel.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -37,7 +37,7 @@
 									 concat:[[[NSNotificationCenter defaultCenter] rac_addObserverForName:kECASIdentityUpdatedNotification object:nil]
 											 map: ^id (NSNotification *value) {
 	    return value.userInfo[kECASIdentityNotificationKey];
-	}]];
+	}]].distinctUntilChanged;
 	
 	[self rac_liftSelector:@selector(applicationsUpdated:) withSignals:RACObserve(self, viewModel.applications), nil];
 	[self rac_liftSelector:@selector(setRefreshing:) withSignals:RACObserve(self, viewModel.loading), nil];
@@ -108,7 +108,7 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
 	if ([segue.identifier isEqualToString:@"applicationStatus"]) {
-		[(SRGApplicationStatusViewController *)segue.destinationViewController viewModel].application = sender;
+		[(ECASApplicationHistoryViewController *)segue.destinationViewController viewModel].application = sender;
 	}
 }
 

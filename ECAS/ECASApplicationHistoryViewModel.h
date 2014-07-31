@@ -11,7 +11,7 @@
 
 @class ECASApplication;
 
-@interface ECASApplicationStatusViewModel : SRGLoadableViewModel
+@interface ECASApplicationHistoryViewModel : SRGLoadableViewModel
 
 @property (nonatomic) ECASApplication *application;
 @property (nonatomic) NSArray *statuses;

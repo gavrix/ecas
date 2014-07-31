@@ -6,21 +6,25 @@
 //  Copyright (c) 2014 Sergey Gavrilyuk. All rights reserved.
 //
 
-#import "ECASApplicationStatusViewController.h"
-#import "ECASApplicationStatusViewModel.h"
+#import "ECASApplicationHistoryViewController.h"
+#import "ECASApplicationHistoryViewModel.h"
+#import "ECASAppHistoryRecordCell.h"
+#import "ECASAppHistoryRecordViewModel.h"
+
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 
-@interface ECASApplicationStatusViewController ()
+@interface ECASApplicationHistoryViewController ()
 
+@property (strong, nonatomic) IBOutlet ECASAppHistoryRecordCell *prototypeCell;
 @end
 
-@implementation ECASApplicationStatusViewController
+@implementation ECASApplicationHistoryViewController
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	self.viewModel = [ECASApplicationStatusViewModel new];
+	self.viewModel = [ECASApplicationHistoryViewModel new];
 	[self rac_liftSelector:@selector(statusesUpdated:) withSignals:RACObserve(self, viewModel.statuses), nil];
 	[self rac_liftSelector:@selector(setRefreshing:) withSignals:RACObserve(self, viewModel.loading), nil];
 	[self.viewModel rac_liftSelector:@selector(reload:)
@@ -31,6 +35,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 	self.refreshControl = [[UIRefreshControl alloc] init];
+}
+
+- (void)viewDidLayoutSubviews {
+	[super viewDidLayoutSubviews];
+	
+	self.prototypeCell.bounds = (CGRect){
+		.origin = CGPointZero,
+		.size = {.width = self.tableView.bounds.size.width, 44.}
+	};
+	[self.prototypeCell setNeedsUpdateConstraints];
+	[self.prototypeCell updateConstraintsIfNeeded];
 }
 
 #pragma mark - Reactive-backed methods
@@ -63,9 +78,22 @@
 	return self.viewModel.statuses.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	CGFloat height = 44;
+	
+	self.prototypeCell.viewModel.historyRecord = self.viewModel.statuses[indexPath.row];
+	
+	[self.prototypeCell setNeedsLayout];
+    [self.prototypeCell layoutIfNeeded];
+
+	height = [self.prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize].height;
+	
+	return height;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statusCell" forIndexPath:indexPath];
-	cell.textLabel.text = self.viewModel.statuses[indexPath.row];
+	ECASAppHistoryRecordCell *cell = [tableView dequeueReusableCellWithIdentifier:@"statusCell" forIndexPath:indexPath];
+	cell.viewModel.historyRecord = self.viewModel.statuses[indexPath.row];
 	return cell;
 }
 
