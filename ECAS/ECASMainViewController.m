@@ -12,11 +12,11 @@
 #import "ECASApplication.h"
 #import "ECASIdentity.h"
 
-#import "SRGApplicationCell.h"
-#import "SRGApplicationCellViewModel.h"
+#import "ECASApplicationCell.h"
+#import "ECASApplicationCellViewModel.h"
 
-#import "SRGApplicationStatusViewController.h"
-#import "SRGApplicationStatusViewModel.h"
+#import "ECASApplicationStatusViewController.h"
+#import "ECASApplicationStatusViewModel.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
@@ -91,7 +91,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-	SRGApplicationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ApplicationCell" forIndexPath:indexPath];
+	ECASApplicationCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ApplicationCell" forIndexPath:indexPath];
 	ECASApplication *application = self.viewModel.applications[indexPath.row];
 	cell.viewModel.application = application;
 	return cell;

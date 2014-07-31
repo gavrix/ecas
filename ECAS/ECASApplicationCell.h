@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@class SRGApplicationCellViewModel;
+@class ECASApplicationCellViewModel;
 
-@interface SRGApplicationCell : UITableViewCell
-@property (nonatomic, readonly) SRGApplicationCellViewModel *viewModel;
+@interface ECASApplicationCell : UITableViewCell
+@property (nonatomic, readonly) ECASApplicationCellViewModel *viewModel;
 @end

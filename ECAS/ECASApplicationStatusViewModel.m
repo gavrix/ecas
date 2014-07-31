@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Sergey Gavrilyuk. All rights reserved.
 //
 
-#import "SRGApplicationStatusViewModel.h"
+#import "ECASApplicationStatusViewModel.h"
 #import "ECASBackendService.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 #import <AFNetworking/AFHTTPRequestOperation.h>
 
-@implementation SRGApplicationStatusViewModel
+@implementation ECASApplicationStatusViewModel
 
 - (instancetype)init {
 	self = [super init];

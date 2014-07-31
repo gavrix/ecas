@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Sergey Gavrilyuk. All rights reserved.
 //
 
-#import "SRGApplicationCellViewModel.h"
+#import "ECASApplicationCellViewModel.h"
 
 #import "ECASApplication.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 
-@implementation SRGApplicationCellViewModel
+@implementation ECASApplicationCellViewModel
 - (instancetype)init {
 	self = [super init];
 	if (self) {

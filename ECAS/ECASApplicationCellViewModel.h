@@ -10,7 +10,7 @@
 
 @class ECASApplication;
 
-@interface SRGApplicationCellViewModel : NSObject
+@interface ECASApplicationCellViewModel : NSObject
 @property (nonatomic) ECASApplication *application;
 
 @property (nonatomic) NSString *appName;

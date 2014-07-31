@@ -6,20 +6,20 @@
 //  Copyright (c) 2014 Sergey Gavrilyuk. All rights reserved.
 //
 
-#import "SRGApplicationCell.h"
+#import "ECASApplicationCell.h"
 
 #import "SRGApplicationCellViewModel.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
-@interface SRGApplicationCell ()
+@interface ECASApplicationCell ()
 @property (weak, nonatomic) IBOutlet UILabel *applicationNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *applicationStatusLabel;
 
 @property (nonatomic) SRGApplicationCellViewModel *viewModel;
 @end
 
-@implementation SRGApplicationCell
+@implementation ECASApplicationCell
 
 
 - (void)awakeFromNib {

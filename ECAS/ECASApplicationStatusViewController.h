@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-@class SRGApplicationStatusViewModel;
+@class ECASApplicationStatusViewModel;
 
-@interface SRGApplicationStatusViewController : UITableViewController
-@property (nonatomic) SRGApplicationStatusViewModel *viewModel;
+@interface ECASApplicationStatusViewController : UITableViewController
+@property (nonatomic) ECASApplicationStatusViewModel *viewModel;
 @end

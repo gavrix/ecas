@@ -6,21 +6,21 @@
 //  Copyright (c) 2014 Sergey Gavrilyuk. All rights reserved.
 //
 
-#import "SRGApplicationStatusViewController.h"
-#import "SRGApplicationStatusViewModel.h"
+#import "ECASApplicationStatusViewController.h"
+#import "ECASApplicationStatusViewModel.h"
 
 #import <ReactiveCocoa/ReactiveCocoa.h>
 
 
-@interface SRGApplicationStatusViewController ()
+@interface ECASApplicationStatusViewController ()
 
 @end
 
-@implementation SRGApplicationStatusViewController
+@implementation ECASApplicationStatusViewController
 
 - (void)awakeFromNib {
 	[super awakeFromNib];
-	self.viewModel = [SRGApplicationStatusViewModel new];
+	self.viewModel = [ECASApplicationStatusViewModel new];
 	[self rac_liftSelector:@selector(statusesUpdated:) withSignals:RACObserve(self, viewModel.statuses), nil];
 	[self rac_liftSelector:@selector(setRefreshing:) withSignals:RACObserve(self, viewModel.loading), nil];
 	[self.viewModel rac_liftSelector:@selector(reload:)
